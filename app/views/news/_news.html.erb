@@ -1,0 +1,14 @@
+<div>
+<%= link_to h(news.title), news_path(news), :class => "btn btn-warning" %>
+<br/>
+<%= "(#{l(:label_x_comments, :count => news.comments_count)})" if news.comments_count > 0 %>
+<br />
+<% unless news.summary.blank? %><span class="summary"><%=h news.summary %></span><br /><br /><% end %>
+<span class="author"><%= authoring news.created_on, news.author %> 
+<% unless @project -%>
+ in project 
+<%= link_to_project(news.project) %>
+<% end -%>
+</span></div>
+<br />
+<br />

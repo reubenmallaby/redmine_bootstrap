@@ -1,0 +1,21 @@
+<%= form_for @project,
+            :url => { :action => 'modules', :id => @project },
+            :html => {:id => 'modules-form',
+                      :method => :post} do |f| %>
+
+<div class="box">
+  <fieldset>
+    <legend><%= l(:text_select_project_modules) %></legend>
+    <% Redmine::AccessControl.available_project_modules.each do |m| %>
+      <label class="floating">
+        <%= l_or_humanize(m, :prefix => "project_module_") %>
+        <%= check_box_tag 'enabled_module_names[]', m, @project.module_enabled?(m) -%>
+      </label>
+    <% end %>
+  </fieldset>
+</div>
+
+<p><%= check_all_links 'modules-form' %></p>
+<p><%= submit_tag l(:button_save) %></p>
+
+<% end %>
