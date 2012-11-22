@@ -61,23 +61,28 @@
 
       <%= label_tag "principal_search", l(:label_principal_search) %><%= text_field_tag 'principal_search', nil, :class => "span2" %>
       <%= javascript_tag "observeSearchfield('principal_search', 'principals', '#{ escape_javascript autocomplete_project_memberships_path(@project) }')" %>
-      <div class="clearfix"></div>
+      <br />
       <br />
            
       <div id="principals">
-        <% principals.sort.each do |principal| -%>
-          <label class="floating span3"><%=h principal %><%= check_box_tag 'membership[user_ids][]', principal.id, false %></label>
-        <% end -%>      
+        <ul class="nolist">
+          <% principals.sort.each do |principal| -%>
+            <li><label><%= check_box_tag 'membership[user_ids][]', principal.id, false %><%=h principal %></label></li>
+          <% end -%>      
+        </ul>
       </div>
-      <div class="clearfix"></div>
+      <br />
       <br />
       
       <%= l(:label_role_plural) %>:
-      <div class="clearfix"></div>
-        <% roles.each do |role| -%>
-          <label class="floating span3"><%=h role %><%= check_box_tag 'membership[role_ids][]', role.id %></label>
-        <% end -%>
-      <div class="clearfix"></div>
+      <div id="roles">
+        <ul>
+          <% roles.each do |role| -%>
+            <li><label><%= check_box_tag 'membership[role_ids][]', role.id %><%=h role %></label></li>
+          <% end -%>
+        </ul>
+      </div>
+      <br />
       <br />
       
       <%= submit_tag l(:button_add), :id => 'member-add-submit', :class => "btn btn-success span3" %>
