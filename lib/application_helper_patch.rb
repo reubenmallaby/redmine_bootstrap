@@ -3,6 +3,7 @@ require_dependency 'application_helper'
 module ApplicationHelper
   alias_method :pagination_links_full_without_bootstrap, :pagination_links_full
   alias_method :per_page_links_without_bootstrap, :per_page_links
+  alias_method :progress_bar_without_bootstrap, :progress_bar
   
   def pagination_links_full(paginator, count=nil, options={})
     page_param = options.delete(:page_param) || :page
@@ -51,6 +52,30 @@ module ApplicationHelper
     end
     "<li><span>#{l(:label_display_per_page, links.join(''))}</span></li>"
     
+  end
+  
+  def progress_bar(pcts, options={})
+    html = ""
+    pcts = [pcts, pcts] unless pcts.is_a?(Array)
+    pcts = pcts.collect(&:round)
+    pcts[1] = pcts[1] - pcts[0]
+    pcts << (100 - pcts[1] - pcts[0])
+    #width = options[:width] || '100px;'
+    #legend = options[:legend] || ''
+    #content_tag('table',
+    #  content_tag('tr',
+    #    (pcts[0] > 0 ? content_tag('td', '', :style => "width: #{pcts[0]}%;", :class => 'closed') : ''.html_safe) +
+    #    (pcts[1] > 0 ? content_tag('td', '', :style => "width: #{pcts[1]}%;", :class => 'done') : ''.html_safe) +
+    #    (pcts[2] > 0 ? content_tag('td', '', :style => "width: #{pcts[2]}%;", :class => 'todo') : ''.html_safe)
+    #  ), :class => 'progress', :style => "width: #{width};").html_safe +
+    #  content_tag('p', legend, :class => 'pourcent').html_safe
+      
+    html << "<div class='progress'>"
+    html << "<div class='bar bar-success' style='width: #{pcts[0]}%;'></div>"
+    html << "<div class='bar bar-warning' style='width: #{pcts[1]}%;'></div>"
+    html << "<div class='bar bar-danger' style='width: #{pcts[2]}%;'></div>"
+    html << "</div>"
+    html.html_safe
   end
   
 end
