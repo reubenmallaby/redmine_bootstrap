@@ -3,7 +3,7 @@
             :html => {:id => 'modules-form',
                       :method => :post} do |f| %>
 
-<div class="box">
+<div class="box" id="modules">
   <fieldset>
     <legend><%= l(:text_select_project_modules) %></legend>
     <% Redmine::AccessControl.available_project_modules.each do |m| %>

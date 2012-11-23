@@ -4520,9 +4520,7 @@ table.table-bordered colgroup + tbody tr:first-child td:last-child {
   border-top-right-radius: 4px;
   -moz-border-radius-topright: 4px;
 }
-table.list tbody tr:nth-child(odd) td,
 table.table-striped tbody tr:nth-child(odd) td,
-table.list tbody tr:nth-child(odd) th,
 table.table-striped tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
 }
@@ -4837,7 +4835,7 @@ a.csv { padding-left: 20px; background-repeat: no-repeat; }
   border-color: #c5c5c5;
   border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 }
-a.icon-add,
+a.icon-add, .buttons a,
 #admin a, .contextual a, #admin-menu a {
   display: inline-block;
   padding: 4px 20px 4px 20px;
@@ -4878,3 +4876,17 @@ a.icon-add:active, a.icon-add.active {
 .nolist a { border: 0; }
 #roles li, #principals li { list-style: none; }
 #roles label, #principals label { float: none; line-height: 13px; text-align: left; width: 220px; }
+#modules label { width: 20%; }
+#login_form { width: 400px; margin: 100px auto; }
+
+#tracker_project_ids { 
+  width: 400px;
+}
+#tracker_project_ids li { 
+  background-image: none !important;
+  background-color: transparent !important;
+  border: 0;
+}
+#tracker_project_ids label { 
+  width: 100px;
+}
