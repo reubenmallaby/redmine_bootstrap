@@ -6127,15 +6127,9 @@ fieldset legend{ font-size: 14px; font-weight: bold; }
 #header a { color: #000; }
 #header h1{ padding: 10px 15px; color: #000000; }
 #header #quick-search{ margin: 15px 15px 0px 0px; }
-<<<<<<< HEAD
 #header #quick-search label a { color:#FFF; font-weight: bold; }
 #header #quick-search label a:hover{ color:#000; }
-input[type=button],input[type=reset],input[type=submit], #attach_files_link{ 
-=======
-#header #quick-search a{ color:#FFF; font-weight: bold; }
-#header #quick-search a:hover{ color:#000; }
 input[type=button],input[type=reset],input[type=submit], #attach_files_link{
->>>>>>> 76910088452eeeb4c00d54f80724e73bd5859e7a
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
