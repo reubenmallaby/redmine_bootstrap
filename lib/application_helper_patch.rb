@@ -4,7 +4,7 @@ module ApplicationHelper
   alias_method :pagination_links_full_without_bootstrap, :pagination_links_full
   alias_method :per_page_links_without_bootstrap, :per_page_links
   alias_method :progress_bar_without_bootstrap, :progress_bar
-  
+
   def pagination_links_full(paginator, count=nil, options={})
     page_param = options.delete(:page_param) || :page
     per_page_links = options.delete(:per_page_links)
@@ -16,7 +16,7 @@ module ApplicationHelper
       html << "<li>#{link_to_content_update(l(:label_previous), url_param.merge(page_param => paginator.current.previous))}</li>"
     end
 
-    html << (pagination_links_each(paginator, options) do |n|      
+    html << (pagination_links_each(paginator, options) do |n|
       "<li>#{link_to_content_update(n.to_s, url_param.merge(page_param => n))}</li>"
     end || '')
 
@@ -33,7 +33,7 @@ module ApplicationHelper
     html << "</ul></div>"
     html.html_safe
   end
-  
+
   def per_page_links(selected=10, item_count=nil)
     values = Setting.per_page_options_array
     if item_count && values.any?
@@ -51,25 +51,16 @@ module ApplicationHelper
       n == selected ? "<li><span>#{n}</span></li>" : "<li>#{link_to_content_update(n, params.merge(:per_page => n))}</li>"
     end
     "<li><span>#{l(:label_display_per_page, links.join(''))}</span></li>"
-    
+
   end
-  
+
   def progress_bar(pcts, options={})
     html = ""
     pcts = [pcts, pcts] unless pcts.is_a?(Array)
     pcts = pcts.collect(&:round)
     pcts[1] = pcts[1] - pcts[0]
     pcts << (100 - pcts[1] - pcts[0])
-    #width = options[:width] || '100px;'
     legend = options[:legend] || ''
-    #content_tag('table',
-    #  content_tag('tr',
-    #    (pcts[0] > 0 ? content_tag('td', '', :style => "width: #{pcts[0]}%;", :class => 'closed') : ''.html_safe) +
-    #    (pcts[1] > 0 ? content_tag('td', '', :style => "width: #{pcts[1]}%;", :class => 'done') : ''.html_safe) +
-    #    (pcts[2] > 0 ? content_tag('td', '', :style => "width: #{pcts[2]}%;", :class => 'todo') : ''.html_safe)
-    #  ), :class => 'progress', :style => "width: #{width};").html_safe +
-    #  content_tag('p', legend, :class => 'pourcent').html_safe
-      
     html << "<div class='progress pourcent' title='#{legend} #{pcts[0]}%'>"
     html << "<div class='bar bar-success' style='width: #{pcts[0]}%;'></div>"
     html << "<div class='bar bar-warning' style='width: #{pcts[1]}%;'></div>"
@@ -77,6 +68,36 @@ module ApplicationHelper
     html << "</div>"
     html.html_safe
   end
-  
+
+  def render_project_nested_lists(projects)
+    s = ''
+    if projects.any?
+      ancestors = []
+      original_project = @project
+      projects.sort_by(&:lft).each do |project|
+        # set the project environment to please macros.
+        @project = project
+        if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
+          s << "<ul class='nolist projects #{ ancestors.empty? ? 'root' : nil}'>\n"
+        else
+          ancestors.pop
+          s << "</li>"
+          while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
+            ancestors.pop
+            s << "</ul><br /><br /></li>\n"
+          end
+        end
+        classes = (ancestors.empty? ? 'root' : 'child')
+        s << "<li class='nolist #{classes}'><div class='#{classes}'>"
+        s << h(block_given? ? yield(project) : project.name)
+        s << "</div>\n"
+        ancestors << project
+      end
+      s << ("</li></ul>\n" * ancestors.size)
+      @project = original_project
+    end
+    s.html_safe
+  end
+
 end
 

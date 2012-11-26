@@ -1,0 +1,79 @@
+<%= error_messages_for 'tracker' %>
+
+<%= hidden_field_tag 'tracker[core_fields][]', '' %>
+
+
+<!--[form:tracker]-->
+<fieldset>
+  <legend>Tracker details</legend>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.text_field :name, :required => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.check_box :is_in_roadmap %>
+    </div>
+  </div>
+  <br />
+  <br />
+
+  <div class="control-group">
+    <label><%= l(:field_core_fields) %></label>
+    <div class="controls">
+      <ul class="nolist pull-right">
+        <% Tracker::CORE_FIELDS.each do |field| %>
+          <li>
+            <%= check_box_tag 'tracker[core_fields][]', field, @tracker.core_fields.include?(field) %>
+            <%= l("field_#{field}".sub(/_id$/, '')) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+
+  <% if IssueCustomField.all.any? %>
+    <div class="control-group">
+      <label><%= l(:label_custom_field_plural) %></label>
+      <div class="controls">
+        <% IssueCustomField.all.each do |field| %>
+          <%= check_box_tag 'tracker[custom_field_ids][]',field.id, @tracker.custom_fields.include?(field) %>
+          <%=h field.name %>
+        <% end %>
+      </div>
+    </div>
+    <%= hidden_field_tag 'tracker[custom_field_ids][]', '' %>
+  <% end %>
+
+  <% if @tracker.new_record? && @trackers.any? %>
+    <div class="control-group">
+      <label for="copy_workflow_from"><%= l(:label_copy_workflow_from) %></label>
+      <div class="controls">
+        <%= select_tag(:copy_workflow_from, content_tag("option") + options_from_collection_for_select(@trackers, :id, :name)) %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <!--[eoform:tracker]-->
+</fieldset>
+
+<% if @projects.any? %>
+  <%= hidden_field_tag('tracker[project_ids][]', '', :id => nil) %>
+  <fieldset id="tracker_project_ids"><legend><%= l(:label_project_plural) %></legend>
+    <div class="control-group">
+      <label for="copy_workflow_from"><%= l(:label_copy_workflow_from) %></label>
+      <div class="controls">
+        <ul class="nolist">
+          <%= render_project_nested_lists(@projects) do |p|
+            content_tag('label', check_box_tag('tracker[project_ids][]', p.id, @tracker.projects.include?(p), :id => nil) + ' ' + h(p))
+          end %>
+        </ul>
+      </div>
+      <%= check_all_links 'tracker_project_ids' %>
+    </div>
+  </fieldset>
+<% end %>
+
+<%= submit_tag l(@tracker.new_record? ? :button_create : :button_save) %>

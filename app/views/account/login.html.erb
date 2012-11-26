@@ -1,0 +1,48 @@
+<%= call_hook :view_account_login_top %>
+<div id="login-form">
+  <%= form_tag(signin_path, :html => { :class => "form-horizontal" } ) do %>
+    <%= back_url_hidden_field_tag %>
+
+    <fieldset class="alert">
+      <legend>Login</legend>
+      <div class="control-group">
+        <label for="username"><%=l(:field_login)%>:</label>
+        <div class="controls">
+          <%= text_field_tag 'username', nil, :tabindex => '1' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="password"><%=l(:field_password)%></label>
+          <div class="controls">
+            <%= password_field_tag 'password', nil, :tabindex => '2' %>
+          </div>
+      </div>
+
+      <% if Setting.openid? %>
+        <div class="control-group">
+          <label for="openid_url"><%=l(:field_identity_url)%></label>
+            <div class="controls">
+              <%= text_field_tag "openid_url", nil, :tabindex => '3' %>
+            </div>
+        </div>
+      <% end %>
+
+      <div class="control-group">
+        <% if Setting.autologin? %>
+          <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
+        <% end %>
+        <% if Setting.lost_password? %>
+          <%= link_to l(:label_password_lost), lost_password_path %>
+        <% end %>
+        <div class="controls pull-right">
+          <input type="submit" name="login" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
+        </div>
+      </div>
+
+    </fieldset>
+  <% end %>
+</div>
+
+<%= javascript_tag "$('#username').focus();" %>
+<%= call_hook :view_account_login_bottom %>
