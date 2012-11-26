@@ -1,0 +1,72 @@
+<%= render :partial => 'action_menu' %>
+
+<h2><%=l(:label_workflow)%></h2>
+
+<div class="tabs">
+  <ul>
+    <li><%= link_to l(:label_status_transitions), {:action => 'edit', :role_id => @role, :tracker_id => @tracker}, :class => 'selected' %></li>
+    <li><%= link_to l(:label_fields_permissions), {:action => 'permissions', :role_id => @role, :tracker_id => @tracker} %></li>
+  </ul>
+</div>
+
+<p><%=l(:text_workflow_edit)%>:</p>
+
+<%= form_tag({}, :method => 'get', :html => { :class => 'form-horizontal' } ) do %>
+  <%= hidden_field_tag 'used_statuses_only', '0' %>
+
+  <fieldset>
+    <div class="control-group">
+      <label for="username"><%=l(:label_role)%>:</label>
+      <div class="controls">
+        <%= select_tag 'role_id', options_from_collection_for_select(@roles, "id", "name", @role && @role.id) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="username"><%=l(:label_tracker)%>:</label>
+      <div class="controls">
+        <%= select_tag 'tracker_id', options_from_collection_for_select(@trackers, "id", "name", @tracker && @tracker.id) %>
+        <%= submit_tag l(:button_edit), :name => nil, :class => "pull-right" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= check_box_tag 'used_statuses_only', '1', @used_statuses_only %> <%= l(:label_display_used_statuses_only) %>
+      </div>
+    </div>
+  </fieldset>
+
+<% end %>
+
+<br />
+<br />
+
+<% if @tracker && @role && @statuses.any? %>
+  <%= form_tag({}, :id => 'workflow_form', :html => { :class => 'form-horizontal' } ) do %>
+    <%= hidden_field_tag 'tracker_id', @tracker.id %>
+    <%= hidden_field_tag 'role_id', @role.id %>
+    <%= hidden_field_tag 'used_statuses_only', params[:used_statuses_only] %>
+    <div class="autoscroll">
+      <%= render :partial => 'form', :locals => {:name => 'always', :workflows => @workflows['always']} %>
+
+      <fieldset class="collapsible" style="padding: 0; margin-top: 0.5em;">
+        <legend onclick="toggleFieldset(this);"><%= l(:label_additional_workflow_transitions_for_author) %></legend>
+        <div id="author_workflows" style="margin: 0.5em 0 0.5em 0;">
+          <%= render :partial => 'form', :locals => {:name => 'author', :workflows => @workflows['author']} %>
+        </div>
+      </fieldset>
+      <%= javascript_tag "hideFieldset($('#author_workflows'))" unless @workflows['author'].present? %>
+
+      <fieldset class="collapsible" style="padding: 0;">
+        <legend onclick="toggleFieldset(this);"><%= l(:label_additional_workflow_transitions_for_assignee) %></legend>
+        <div id="assignee_workflows" style="margin: 0.5em 0 0.5em 0;">
+      <%= render :partial => 'form', :locals => {:name => 'assignee', :workflows => @workflows['assignee']} %>
+        </div>
+      </fieldset>
+      <%= javascript_tag "hideFieldset($('#assignee_workflows'))" unless @workflows['assignee'].present? %>
+    </div>
+    <%= submit_tag l(:button_save) %>
+  <% end %>
+<% end %>
+
+<% html_title(l(:label_workflow)) -%>
