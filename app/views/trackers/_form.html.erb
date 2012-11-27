@@ -2,7 +2,7 @@
 
 <%= hidden_field_tag 'tracker[core_fields][]', '' %>
 
-
+<div class="splitcontentleft">
 <!--[form:tracker]-->
 <fieldset>
   <legend>Tracker details</legend>
@@ -58,8 +58,10 @@
 
   <!--[eoform:tracker]-->
 </fieldset>
+</div>
 
 <% if @projects.any? %>
+  <div class="splitcontentright">
   <%= hidden_field_tag('tracker[project_ids][]', '', :id => nil) %>
   <fieldset id="tracker_project_ids"><legend><%= l(:label_project_plural) %></legend>
     <div class="control-group">
@@ -74,6 +76,7 @@
       <%= check_all_links 'tracker_project_ids' %>
     </div>
   </fieldset>
+  </div>
 <% end %>
 
 <%= submit_tag l(@tracker.new_record? ? :button_create : :button_save) %>
