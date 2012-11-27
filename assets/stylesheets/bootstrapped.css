@@ -1078,12 +1078,17 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
+  padding-left: 10px;
   margin-bottom: 20px;
   font-size: 21px;
   line-height: 40px;
-  color: #333333;
-  border: 0;
-  border-bottom: 1px solid #e5e5e5;
+  color: #333;
+  background-color: #FFF;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  border: 1px solid #bbb;
+  width: 90%;
 }
 legend small {
   font-size: 15px;
