@@ -5679,6 +5679,7 @@ fieldset legend{ font-size: 14px; font-weight: bold; }
 #header #quick-search{ margin: 15px 15px 0px 0px; }
 #header #quick-search label a { color:#FFF; font-weight: bold; }
 #header #quick-search label a:hover{ color:#000; }
+
 input[type=button],input[type=reset],input[type=submit], #attach_files_link{
   display: inline-block;
   *display: inline;
@@ -5695,14 +5696,6 @@ input[type=button],input[type=reset],input[type=submit], #attach_files_link{
   cursor: pointer;
   color: #333333;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #e6e6e6;
@@ -5767,7 +5760,6 @@ div.box, div.issue{
   -webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;
   -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05);-moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05);box-shadow:0 1px 2px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
-  clear: both;
 }
   div.issue h3, div.issue p{ padding: 0px 10px 0px 10px; }
   .box fieldset{ margin: 0px 10px 10px 10px; }
