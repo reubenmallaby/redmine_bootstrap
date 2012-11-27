@@ -4,6 +4,7 @@ module ApplicationHelper
   alias_method :pagination_links_full_without_bootstrap, :pagination_links_full
   alias_method :per_page_links_without_bootstrap, :per_page_links
   alias_method :progress_bar_without_bootstrap, :progress_bar
+  alias_method :render_project_jump_box_without_bootstrap, :render_project_jump_box
 
   def pagination_links_full(paginator, count=nil, options={})
     page_param = options.delete(:page_param) || :page
@@ -99,5 +100,25 @@ module ApplicationHelper
     s.html_safe
   end
 
+      # modified from redmine_favourite_projects plugin
+    def render_project_jump_box
+      return unless User.current.logged?
+      projects = User.current.memberships.collect(&:project).compact.uniq
+      if projects.any?
+        s = '<div class="btn-group">'
+        s+= '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">'
+        s+= l(:label_jump_to_a_project)
+        s+= '<span class="caret"></span>'
+        s+= '</a>'
+        s+= '<ul class="dropdown-menu">'
+        projects.each do |project|
+          s+= '<li>' + link_to(project.name, :controller => 'projects', :action => 'show', :id => project.id) + '</li>' 
+        end
+        s+= '</ul>'
+        s+= '</div>'
+        s.html_safe
+      end
+    end
+  
 end
 
