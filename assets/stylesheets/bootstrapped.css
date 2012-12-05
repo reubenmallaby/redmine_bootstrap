@@ -6303,39 +6303,25 @@ a.icon-add {
 }
 a.icon-add { color: rgba(255, 255, 255, 0.75); }
 
-a.icon-add:hover, a.icon-add.disabled, a.icon-add[disabled] {
-  color: #ffffff;
-  background-color: #51a351;
-}
-a.icon-add:active, a.icon-add.active {
-  background-color: #408140;
-}
+a.icon-add:hover, a.icon-add.disabled, a.icon-add[disabled] { color: #ffffff; background-color: #51a351; }
+a.icon-add:active, a.icon-add.active { background-color: #408140; }
 .nolist a { border: 0; }
 #roles li, #principals li { list-style: none; }
 #roles label, #principals label { float: none; line-height: 13px; text-align: left; width: 220px; }
 #modules label { width: 20%; }
-
 #login-form { width: 500px; margin: auto; }
 #login-form fieldset { width: 500px; }
-
-#tracker_project_ids {
-  width: 400px;
-}
+#tracker_project_ids { width: 400px; }
 #tracker_project_ids li {
   background-image: none !important;
   background-color: transparent !important;
   border: 0;
 }
-#tracker_project_ids label {
-  width: 100px;
-}
+#tracker_project_ids label { width: 100px; }
 fieldset { min-width: 400px; }
 .nolist { list-style: none; }
-.nolist.root {
-  clear: both;
-}
-#issue-form { width: 100%;
-}
+.nolist.root { clear: both; }
+#issue-form { width: 100%; }
 div.wiki ul.toc {
   background-color: #FCF8E3;
   border: 1px solid #FBEED5;
@@ -6348,7 +6334,8 @@ div.wiki ul.toc {
   padding: 10px;
   font-size: 10pt;
 }
-div.wiki ul.toc a {
-  color : #C09853;
-  font-size: 1.2em;
-}
+div.wiki ul.toc a { color : #C09853; font-size: 1.2em; }
+tr.priority-7 { background-color: #F2DEDE; color: #B94A48; }
+tr.priority-6 { background-color: #F2DEDE; color: #B94A48; }
+tr.priority-5 { background-color: #F2DEDE; color: #B94A48; }
+tr.priority-3 { background-color: #FCF8E3; color: #C09853; }
