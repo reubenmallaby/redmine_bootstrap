@@ -1,4 +1,4 @@
-@import url(../../../stylesheets/application.css);
+/*@import url(../../../stylesheets/application.css);*/
 /*! jQuery UI - v1.9.1 - 2012-11-15
 * http://jqueryui.com
 * Includes:
@@ -1889,6 +1889,7 @@ legend + .control-group {
 .form-horizontal .form-actions {
   padding-left: 180px;
 }
+contextual a,
 a.icon-add, input[type=submit],input[type=button],input[type=reset], #attach_files_link,
 .btn {
   display: inline-block;
@@ -1947,6 +1948,7 @@ a.icon-add, input[type=submit],input[type=button],input[type=reset], #attach_fil
 .btn:first-child {
   *margin-left: 0;
 }
+contextual a,
 a.icon-add:hover,
 input[type=submit]:hover,
 input[type=button]:hover,
@@ -6295,7 +6297,6 @@ a.icon-add, .buttons a, #admin a, .contextual a, #admin-menu a {
 }
 a.icon-add {
   color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #5bb75b !important;
   border-color: #51a351 #51a351 #387038;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
@@ -6334,4 +6335,20 @@ fieldset { min-width: 400px; }
   clear: both;
 }
 #issue-form { width: 100%;
+}
+div.wiki ul.toc {
+  background-color: #FCF8E3;
+  border: 1px solid #FBEED5;
+  color : #C09853;
+  display: table;
+  line-height: 1.2em;
+  margin-bottom: 12px;
+  margin-left: 0;
+  margin-right: 12px;
+  padding: 10px;
+  font-size: 10pt;
+}
+div.wiki ul.toc a {
+  color : #C09853;
+  font-size: 1.2em;
 }
