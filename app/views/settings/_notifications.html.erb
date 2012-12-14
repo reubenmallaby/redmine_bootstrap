@@ -14,9 +14,13 @@
 
 <fieldset class="box" id="notified_events"><legend><%=l(:text_select_mail_notifications)%></legend>
 <%= hidden_field_tag 'settings[notified_events][]', '' %>
-<% @notifiables.each do |notifiable| %>
-  <div class="floating span2"><%= notification_field notifiable %></div>
-<% end %>
+<div class="control-group">
+  <div class="controls">
+    <% @notifiables.each do |notifiable| %>
+      <%= notification_field notifiable %>
+    <% end %>
+  </div>
+</div>
 <div class="clear"></div>
 <br />
 <p><%= check_all_links('notified_events') %></p>

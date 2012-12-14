@@ -1,6 +1,7 @@
 require 'redmine'
 require 'bootstrap_hooks'
 require 'application_helper_patch'
+require 'settings_helper_patch'
 
 Redmine::Plugin.register :redmine_bootstrap do
   name 'Redmine Bootstrap theme plugin'
