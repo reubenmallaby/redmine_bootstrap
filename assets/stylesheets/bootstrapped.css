@@ -6462,9 +6462,9 @@ fieldset { min-width: 400px; }
 .nolist.root { clear: both; }
 #issue-form { width: 100%; }
 div.wiki ul.toc {
-  background-color: #FCF8E3;
-  border: 1px solid #FBEED5;
-  color : #C09853;
+  background-color: #D9EDF7;
+  border: 1px solid #BCE8F1;
+  color : #3A87AD;
   display: table;
   line-height: 1.2em;
   margin-bottom: 12px;
@@ -6473,7 +6473,7 @@ div.wiki ul.toc {
   padding: 10px;
   font-size: 10pt;
 }
-div.wiki ul.toc a { color : #C09853; font-size: 1.2em; }
+div.wiki ul.toc a { color : #3A87AD; font-size: 1.2em; }
 tr.priority-7 { background-color: #F2DEDE; color: #B94A48; }
 tr.priority-6 { background-color: #F2DEDE; color: #B94A48; }
 tr.priority-5 { background-color: #F2DEDE; color: #B94A48; }
@@ -6619,9 +6619,15 @@ a.icon-unlock  {
   
 /* Fixed position for TOC */ 
 div.wiki ul.toc.right {
-    margin: 0;
-    position: fixed;
-    right: 25%;
-    top: 190px;
-    width: auto;
+  margin: 0;
+  position: fixed;
+  right: 25%;
+  top: 190px;
+  width: auto;
+  height: 12px;
+  display: block;
+  overflow: hidden;
+}
+div.wiki ul.toc.right:hover {
+  height: auto;
 }
