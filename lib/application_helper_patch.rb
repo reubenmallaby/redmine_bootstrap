@@ -6,6 +6,7 @@ module ApplicationHelper
   alias_method :progress_bar_without_bootstrap, :progress_bar
   alias_method :render_project_jump_box_without_bootstrap, :render_project_jump_box
 
+  # original method: http://www.redmine.org/projects/redmine/repository/revisions/11026/entry/trunk/lib/redmine/pagination.rb#L156
   def pagination_links_full(paginator, count=nil, options={})
     page_param = options.delete(:page_param) || :page
     per_page_links = options.delete(:per_page_links)
@@ -13,21 +14,31 @@ module ApplicationHelper
     url_param = params.dup
 
     html = '<div class="pagination"><ul>'
-    if paginator.current.previous
-      html << "<li>#{link_to_content_update(l(:label_previous), url_param.merge(page_param => paginator.current.previous))}</li>"
+    
+    if paginator.previous_page
+      html << "<li>#{link_to_content_update(l(:label_previous), url_param.merge(page_param => paginator.previous_page))}</li>"
+    end
+    
+    previous = nil
+    paginator.linked_pages.each do |page|
+      if previous && previous != page - 1
+        html << ' ... '
+      end
+      if page == paginator.page
+        html << "<li>#{link_to(page.to_s, '#')}</li>"
+      else
+        html << "<li>#{link_to(page.to_s, url_param.merge(page_param => page))}</li>"
+      end
+      previous = page
     end
 
-    html << (pagination_links_each(paginator, options) do |n|
-      "<li>#{link_to_content_update(n.to_s, url_param.merge(page_param => n))}</li>"
-    end || '')
-
-    if paginator.current.next
-      html << "<li>#{link_to_content_update(l(:label_next), url_param.merge(page_param => paginator.current.next))}</li>"
+    if paginator.next_page
+      html << "<li>#{link_to_content_update(l(:label_next), url_param.merge(page_param => paginator.next_page))}</li>"
     end
 
     unless count.nil?
-      html << "<li><span>(#{paginator.current.first_item}-#{paginator.current.last_item}/#{count})</span></li>"
-      if per_page_links != false && links = per_page_links(paginator.items_per_page, count)
+      html << "<li><span>(#{paginator.first_item}-#{paginator.last_item}/#{count})</span></li>"
+      if per_page_links != false && links = per_page_links(paginator.per_page, count)
         html << "#{links}"
       end
     end
